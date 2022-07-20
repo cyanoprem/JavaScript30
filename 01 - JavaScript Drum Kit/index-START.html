@@ -59,8 +59,44 @@
 
 <script>
 
-</script>
 
+
+
+window.addEventListener('keydown', playSound);
+window.addEventListener('keydown', changeCss);
+window.addEventListener('keyup', removeTransition);
+
+const dataKey = document.querySelectorAll('.key');
+
+const audioFiles = document.querySelectorAll('audio');
+
+function playSound(e) {
+  for(i = 0; i < audioFiles.length; i++) {
+    if(e.keyCode == audioFiles[i].getAttribute("data-key")) {
+      let audio = new Audio(audioFiles[i].getAttribute("src"));
+      audio.play();
+    }
+  }
+} 
+
+function changeCss(e) {
+  for(i=0; i < dataKey.length; i++) {
+    if(e.keyCode == dataKey[i].getAttribute("data-key")) {
+      dataKey[i].classList.add("playing");
+    }
+  }
+}
+
+function removeTransition(e) {
+  for(i=0; i < dataKey.length; i++) {
+    if(e.keyCode == dataKey[i].getAttribute("data-key")) {
+      dataKey[i].classList.remove("playing");
+    }
+  }
+}
+
+
+</script>
 
 </body>
 </html>
