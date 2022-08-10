@@ -37,17 +37,88 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const fifteen = inventors.filter(checkYear);
+
+    function checkYear(inventor) {
+      return (inventor.year >= 1500 && inventor.year < 1600);
+    }
+    
+    // console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const name = inventors.map(firstAndLastName);
+
+    function firstAndLastName(inventor) {
+      return inventor.first + " " + inventor.last;
+    }
+
+    // console.table(name);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    const birthYears = inventors.map(getYear);
+
+    function getYear(inventor) {
+      return inventor.year;
+    }
+
+    birthYears.sort(function(a, b) {return a-b});
+    
+    
+    let sortedByBirthDate = [];
+
+    
+    for (i=0; i<birthYears.length; i++) {
+      for(j=0; j<birthYears.length; j++) {
+        if (birthYears[i] == inventors[j].year) {
+          sortedByBirthDate.push(inventors[j]);
+        }
+      }
+    }
+    
+
+    // console.table(sortedByBirthDate);
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    
+
+    let livedYears = [];
+
+    for (i=0; i<inventors.length; i++) {
+      livedYears.push(inventors[i].passed - inventors[i].year);
+    }
+
+    const totalYears = livedYears.reduce(
+      (accumulator, currentValue) => accumulator + currentValue
+    );
+
+    // console.log(totalYears);
+
+
+
+
+
     // 5. Sort the inventors by years lived
+
+    livedYears.sort(function(a, b) {return a-b});
+
+    let sortedByYearsLived = [];
+
+    
+    for (i=0; i<livedYears.length; i++) {
+      for(j=0; j<livedYears.length; j++) {
+        if (livedYears[i] == inventors[j].year) {
+          sortedByYearsLived.push(inventors[j]);
+        }
+      }
+    }
+    
+
+    // console.table(sortedByYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -55,6 +126,9 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+    people.sort();
+    console.log(people);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
